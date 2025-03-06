@@ -1,13 +1,25 @@
 import { motion } from "framer-motion";
-import { Mail, User } from "lucide-react";
-import { Input } from "postcss";
+import { Lock, Mail, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import PasswordStrengthMeter from "../components/PasswordStrengthMeter";
+import { useState } from "react";
+import Input from "../components/Input";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signup(email, password, name);
+      navigate("/verify-email");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <motion.div

@@ -1,6 +1,8 @@
-import { Loader } from 'lucide-react';
-import React from 'react'
+import { motion } from "framer-motion";
+import { Loader, Mail } from 'lucide-react';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Input from "../components/Input";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +26,7 @@ const LoginPage = () => {
         </h2>
         
         <form onSubmit={handleLogin}>
-          <Input 
+          <Input
             icon={Mail}
             type='email'
             placeholder='Email Address'
