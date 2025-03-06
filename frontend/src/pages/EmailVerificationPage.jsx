@@ -7,6 +7,8 @@ const EmailVerificationPage = () => {
     const inputRefs = useRef([]);
     const navigate = useNavigate();
 
+    const { error, isLoading, verifyEmail } = useAuthStore();
+
     const handleChange = (index, value) => {
         const newCode = [...Code];
 
@@ -40,10 +42,16 @@ const EmailVerificationPage = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const verificationCode = code.json("");
-        alert(`Verification code submitted: ${verificationCode}`);
+        try {
+            await verifyEmail(verificationCode);
+            navigate("/");
+            toast.success("Email verified successfully");
+        } catch (error) {
+
+        }
     }
 
     // Auto submit when all field are filled
@@ -65,7 +73,7 @@ const EmailVerificationPage = () => {
                     Verify Your Email
                 </h2>
                 <p className="text-center text-gray-300 mb-6">Enter the 6-digit code sent to your email address.</p>
-
+                {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="flex justify-between">
                         {code.map((digit, index) =>(
