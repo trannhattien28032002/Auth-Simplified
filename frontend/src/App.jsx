@@ -3,10 +3,11 @@ import FloatingShape from "./components/FloatingShape";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
+import LoadingSpinner from "./components/LoadingSpinner.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore.js";
 import { useEffect } from "react";
-import DashboardPage from "./pages/DashboardPage.jsx";
 
 // protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -39,6 +40,8 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  if (isCheckingAuth) return <LoadingSpinner />
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-900 to-emerald-900 flex items-center justify-center relative overflow-hidden">
