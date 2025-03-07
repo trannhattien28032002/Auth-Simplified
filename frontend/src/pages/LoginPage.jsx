@@ -11,7 +11,7 @@ const LoginPage = () => {
   
   const { login, isLoading, error } = useAuthStore();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     await login(email, password);
   }
