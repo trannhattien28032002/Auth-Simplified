@@ -11,7 +11,7 @@ const EmailVerificationPage = () => {
 
     const handleChange = (index, value) => {
         const newCode = [...Code];
-
+        
         // Handle pasted content
         if (value.length > 1) {
             const pastedCode = value.slice(0, 6).split("");
