@@ -8,6 +8,7 @@ import LoadingSpinner from "./components/LoadingSpinner.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore.js";
 import { useEffect } from "react";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
 
 // protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -93,6 +94,9 @@ function App() {
           }
         />
         <Route path="/verify-email" element={<EmailVerificationPage />} />
+        <Route path="/forgot-password" element={<RedirectAuthenticatedUser>
+          <ForgotPasswordPage />
+        </RedirectAuthenticatedUser>} />
       </Routes>
       <Toaster />
     </div>
