@@ -11,6 +11,28 @@ const ResetPasswordPage = () => {
   const { token } = useParams();
   const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Password do not match");
+      return;
+    }
+
+    try {
+      await resetPassword(token, password);
+
+      toast.success("Password reset successfully, redirecting to login page...");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || "Error resetting password");
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
